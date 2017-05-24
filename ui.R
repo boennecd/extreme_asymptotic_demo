@@ -27,7 +27,19 @@ shinyUI(fluidPage(
           
           numericInput(
             "seed", "Select seed",
-            value = 5480408, min = 1, max = 1e7, step = 1)
+            value = 5480408, min = 1, max = 1e7, step = 1),
+          
+          sliderInput(
+            "block_size_1", "Block size in first plot",
+            value = 10, min = 2, max = 20, step = 2),
+          
+          sliderInput(
+            "block_size_2", "Block size in second plot",
+            value = 100, min = 10, max = 200, step = 5),
+          
+          sliderInput(
+            "block_size_3", "Block size in second plot",
+            value = 1000, min = 20, max = 10000, step = 20)
         ),
         
         wellPanel(

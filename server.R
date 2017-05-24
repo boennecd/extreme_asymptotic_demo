@@ -20,26 +20,26 @@ shinyServer(function(input, output) {
   output$sim_plot_small <- renderPlot({
     make_plot(
       choice = choices[[input$choice]],
-      m = m, n = ns[1], seed = input$seed)
+      m = m, n = input$block_size_1, seed = input$seed)
   })
   
   output$sim_plot_medium <- renderPlot({
     make_plot(
       choice = choices[[input$choice]],
-      m = m, n = ns[2], seed = input$seed)
+      m = m, n = input$block_size_2, seed = input$seed)
   })
   
   output$sim_plot_large <- renderPlot({
     make_plot(
       choice = choices[[input$choice]],
-      m = m, n = ns[3], seed = input$seed)
+      m = m, n = input$block_size_3, seed = input$seed)
   })
   
   output$explanation <- renderUI({
     out <- paste0(
-      "The continous lines on the plots in the first column are the density estimates of the normalized maxima.",
-      " The dashed lines are the asymptotic distribution which in this case is the ", choices[[input$choice]]$Asym, ".",
-      "\n\nThe plot to the right shows the discrete terms of the KL distance between the asymptotic density and the estimated density.",
+      "The dark lines in the plots in the first column are the emperical cumulative density function of the normalized maxima.",
+      " The gray lines are the asymptotic cumulative density function which in this case is the ", choices[[input$choice]]$Asym, ".",
+      "\n\nThe plot to the right shows the distance between the emperical cumulative density function and asymptotic cumulative density function.",
       "\n\nThe most important parts of the code is printed below in case I have made an error.")
       
     to_html_w_lb(out)
@@ -69,9 +69,8 @@ shinyServer(function(input, output) {
     asymp <- choices[[input$choice]]$Asym
     
     out <- paste(head(
-      capture.output(dens_assymp[[asymp]]), 
-      -1) # We dont want the byte code
-      , collapse = "\n")
+      capture.output(cdf_asymp[[asymp]]),
+      -1), collapse = "\n")
     
     xtra <- if(is.null(choices[[input$choice]]$a))
       "" else
@@ -79,6 +78,6 @@ shinyServer(function(input, output) {
           "\n\nwhere a = ", choices[[input$choice]]$a, ".")
     
     to_html_w_lb(paste0(
-      "The density of ", asymp, " is computed with:\n", out, xtra))
+      "The cdf of ", asymp, " is computed with:\n", out, xtra))
   })
 })
