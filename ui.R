@@ -38,7 +38,7 @@ shinyUI(fluidPage(
             value = 100, min = 10, max = 200, step = 5),
           
           sliderInput(
-            "block_size_3", "Block size in second plot",
+            "block_size_3", "Block size in third plot",
             value = 1000, min = 20, max = 10000, step = 20)
         ),
         
