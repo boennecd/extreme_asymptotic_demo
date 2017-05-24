@@ -128,9 +128,7 @@ make_plot <- function(choice, n, m, seed){
 ######
 # Settings
 m <- 10000
-ns <- c(16, 256, 1024)
-
 
 # #####
 # # Comment back to test
-make_plot(choices[["Cauchy"]], n = 8, m = 1000, seed = 2)
+# make_plot(choices[["Cauchy"]], n = 8, m = 1000, seed = 2)
